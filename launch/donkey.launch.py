@@ -1,6 +1,9 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
+# parameters_file_name = 'config.yaml'
+
+
 def generate_launch_description():
     return LaunchDescription([
         Node(
@@ -26,6 +29,13 @@ def generate_launch_description():
             package='rplidar_ros',
             node_executable='rplidarNode',
             node_name='rplidarNode',
-            parameters=''
+            output="screen",
+            parameters=[
+                {'serial_port': '/dev/ttyUSB0'},
+                {'serial_baudrate': '115200'},
+                {'frame_id': 'laser'},
+                {'inverted': 'false'},
+                {'angle_compensate': 'true'}
+            ]
         )
     ])
